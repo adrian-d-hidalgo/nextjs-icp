@@ -10,7 +10,7 @@ export { idlFactory } from "./assets.did.js";
  * beginning in dfx 0.15.0
  */
 export const canisterId =
-  process.env.CANISTER_ID_ASSETS ||
+  process.env.NEXT_PUBLIC_ASSETS_CANISTER_ID ||
   process.env.ASSETS_CANISTER_ID;
 
 export const createActor = (canisterId, options = {}) => {

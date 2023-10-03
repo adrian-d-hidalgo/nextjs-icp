@@ -1,8 +1,13 @@
 {
+  "dfx": "0.15.0",
+  "version": 1,
   "canisters": {
     "test": {
       "main": "src/backend/test/main.mo",
-      "type": "motoko"
+      "type": "motoko",
+      "declarations": {
+        "node_compatibility": true
+      }
     },
     "internet_identity": {
       "type": "custom",
@@ -17,15 +22,10 @@
     "assets": {
       "dependencies": ["internet_identity", "test"],
       "frontend": {
-        "entrypoint": "dist/index.html"
+        "entrypoint": "out/index.html"
       },
-      "source": ["dist/"],
+      "source": ["out"],
       "type": "assets"
-    }
-  },
-  "defaults": {
-    "build": {
-      "packtool": ""
     }
   },
   "networks": {
@@ -37,6 +37,5 @@
       "providers": ["https://mainnet.dfinity.network"],
       "type": "persistent"
     }
-  },
-  "version": 1
+  }
 }
