@@ -20,7 +20,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dfx:build": "dfx generate ; dfx deploy ; dfx generate",
+    "dfx:build": "dfx generate ; dfx deploy",
     "dfx:build:fix": "sh scripts/fix-dfx-generate.sh"
   },
   "devDependencies": {
