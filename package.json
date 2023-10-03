@@ -1,12 +1,31 @@
 {
-  "name": "my-nextjs-app",
+  "name": "icp-nextjs-starter",
   "version": "0.1.0",
+  "author": "Adrián Hidalgo",
+  "description": "Next.js Internet Computer Starter Template",
   "private": true,
+  "engines": {
+    "node": "18.16"
+  },
+  "keywords": [
+    "nextjs",
+    "typescript",
+    "internet computer",
+    "icp",
+    "starter",
+    "dfinity"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dfx:build": "dfx generate ; dfx deploy ; dfx generate",
+    "dfx:build:fix": "sh scripts/fix-dfx-generate.sh"
+  },
+  "devDependencies": {
+    "eslint": "8.49.0",
+    "eslint-config-next": "13.5.1"
   },
   "dependencies": {
     "@dfinity/agent": "^0.19.2",
@@ -16,8 +35,6 @@
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "buffer": "^6.0.3",
-    "eslint": "8.49.0",
-    "eslint-config-next": "13.5.1",
     "next": "13.5.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

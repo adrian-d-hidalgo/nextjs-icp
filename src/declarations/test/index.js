@@ -10,7 +10,7 @@ export { idlFactory } from "./test.did.js";
  * beginning in dfx 0.15.0
  */
 export const canisterId =
-  process.env.CANISTER_ID_TEST ||
+  process.env.NEXT_PUBLIC_TEST_CANISTER_ID ||
   process.env.TEST_CANISTER_ID;
 
 export const createActor = (canisterId, options = {}) => {
@@ -39,5 +39,3 @@ export const createActor = (canisterId, options = {}) => {
     ...options.actorOptions,
   });
 };
-
-export const test = createActor(canisterId);
