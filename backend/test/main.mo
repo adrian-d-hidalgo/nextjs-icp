@@ -1,5 +1,6 @@
+import Principal "mo:base/Principal";
 actor Test {
-    public query func greet(name : Text) : async Text {
-        return name # " super";
+    public shared query ({ caller }) func greet(name : Text) : async Text {
+        "Hi, " # Principal.toText(caller);
     };
 };
