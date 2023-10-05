@@ -1,8 +1,5 @@
-import { ReactNode, createContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { AppDispatch, AppState } from "@/store/store";
-import { logInAction, logOutAction } from "@/store/auth/auht.actions";
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { AuthClient } from "@dfinity/auth-client";
 
 export type AuthType = {
   logIn: () => void | undefined;
@@ -10,32 +7,66 @@ export type AuthType = {
 };
 
 export type AuthContextType = {
+  // initialStateIsLoading: boolean;
   isAuthenticated: boolean;
   logIn: () => any;
   logOut: () => any;
 };
 
 export type AuthContextProviderType = {
+  protectedRoutes?: Array<string>;
   children: ReactNode;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { isAuthenticated } = useSelector((state: AppState) => state.auth);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  function logIn() {
-    dispatch(logInAction());
+  async function getAuthtenticationStatus() {
+    try {
+      const auth = await AuthClient.create();
+      const isAuthenticated = await auth.isAuthenticated();
+      setIsAuthenticated(isAuthenticated);
+    } catch (error) {
+      throw error;
+    }
   }
 
-  function logOut() {
-    dispatch(logOutAction());
+  useEffect(() => {
+    getAuthtenticationStatus();
+  });
+
+  async function logIn() {
+    try {
+      const auth = await AuthClient.create();
+      await auth.login({
+        onSuccess: () => {
+          setIsAuthenticated(true);
+        },
+        onError: () => {
+          console.log("Hubo un error al hacer login");
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function logOut() {
+    try {
+      const auth = await AuthClient.create();
+      await auth.logout();
+      setIsAuthenticated(false);
+    } catch (error) {
+      throw error;
+    }
   }
 
   return (
     <AuthContext.Provider
       value={{
+        // initialStateIsLoading,
         isAuthenticated,
         logIn,
         logOut,
