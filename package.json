@@ -28,7 +28,8 @@
     "@types/redux-batched-subscribe": "^0.1.5",
     "@types/redux-logger": "^3.0.10",
     "eslint": "8.49.0",
-    "eslint-config-next": "13.5.1"
+    "eslint-config-next": "13.5.1",
+    "eslint-config-prettier": "^9.0.0"
   },
   "dependencies": {
     "@dfinity/agent": "^0.19.2",
