@@ -7,20 +7,23 @@ export type AuthType = {
 };
 
 export type AuthContextType = {
-  // initialStateIsLoading: boolean;
   isAuthenticated: boolean;
   logIn: () => any;
   logOut: () => any;
 };
 
 export type AuthContextProviderType = {
-  protectedRoutes?: Array<string>;
+  publicRoutes?: Array<string>;
   children: ReactNode;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
 
-export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
+export const AuthContextProvider = ({
+  children,
+  publicRoutes = [],
+}: AuthContextProviderType) => {
+  const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   async function getAuthtenticationStatus() {
@@ -28,6 +31,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
       const auth = await AuthClient.create();
       const isAuthenticated = await auth.isAuthenticated();
       setIsAuthenticated(isAuthenticated);
+      setLoading(false);
     } catch (error) {
       throw error;
     }
@@ -66,13 +70,12 @@ export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
   return (
     <AuthContext.Provider
       value={{
-        // initialStateIsLoading,
         isAuthenticated,
         logIn,
         logOut,
       }}
     >
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

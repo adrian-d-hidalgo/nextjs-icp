@@ -1,5 +1,4 @@
 import { AppProps } from "next/app";
-import { Provider } from "react-redux";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 import { AuthContextProvider } from "@/context/auth.context";
