@@ -19,7 +19,6 @@ export class Auth {
 
   private async init() {
     this.client = await AuthClient.create();
-    console.log({ client: this.client });
   }
 
   public logIn() {

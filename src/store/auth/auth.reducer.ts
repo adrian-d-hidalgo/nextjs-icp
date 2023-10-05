@@ -30,7 +30,7 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
       })
       .addCase(authLoadInitialState.fulfilled, (state, action) => {
-        state = action.payload;
+        state.isAuthenticated = action.payload.isAuthenticated;
       });
   },
 });

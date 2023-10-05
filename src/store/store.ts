@@ -1,5 +1,5 @@
 // file: store.ts
-import { compose, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 
 // We'll use redux-logger just as an example of adding another middleware
@@ -9,6 +9,7 @@ import logger from "redux-logger";
 // import { batchedSubscribe } from "redux-batched-subscribe";
 
 import authReducer from "./auth/auth.reducer";
+import { authLoadInitialState } from "./auth/auht.actions";
 
 const reducer = {
   auth: authReducer,
@@ -33,3 +34,5 @@ export const store = configureStore({
   preloadedState,
   //   enhancers: [batchedSubscribe(debounceNotify)],
 });
+
+store.dispatch(authLoadInitialState()); //TODO: Check if there is a better way to do this

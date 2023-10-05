@@ -12,7 +12,6 @@ export const authLoadInitialState = createAsyncThunk(
       const state = { isAuthenticated: await auth.isAuthenticated() };
       return state;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   }
@@ -23,7 +22,6 @@ export const logInAction = createAsyncThunk("auth/log-in", async () => {
   try {
     await auth.logIn();
   } catch (error) {
-    console.log(error);
     throw error;
   }
 });
@@ -33,7 +31,6 @@ export const logOutAction = createAsyncThunk("auth/log-out", async () => {
   try {
     await auth.logOut();
   } catch (error) {
-    console.log(error);
     throw error;
   }
 });
