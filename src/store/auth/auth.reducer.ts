@@ -17,22 +17,26 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    authResetAction(state) {
+    reset(state) {
       state = initialState;
+    },
+    authenticate(state) {
+      state.isAuthenticated = true;
+    },
+    deauthenticate(state) {
+      state.isAuthenticated = false;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(logInAction.fulfilled, (state) => {
-        state.isAuthenticated = true;
-      })
-      .addCase(logOutAction.fulfilled, (state) => {
-        state.isAuthenticated = false;
-      })
+      .addCase(logInAction.fulfilled, (state) => {})
+      .addCase(logOutAction.fulfilled, (state) => {})
       .addCase(authLoadInitialState.fulfilled, (state, action) => {
         state.isAuthenticated = action.payload.isAuthenticated;
       });
   },
 });
+
+export const { authenticate, deauthenticate } = authSlice.actions;
 
 export default authSlice.reducer;
