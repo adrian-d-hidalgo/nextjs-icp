@@ -1,3 +1,4 @@
+import { CanisterNamesType } from "@/declarations";
 import {
   ActorConfig,
   ActorSubclass,
@@ -27,7 +28,7 @@ export type createActorType<T> = (
 ) => ActorSubclass<T>;
 
 export type DeclarationType<T> = {
-  name: string;
+  name: CanisterNamesType;
   canisterId: string | Principal;
   createActor: createActorType<T>;
 };
