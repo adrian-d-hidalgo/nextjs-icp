@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { makeTestActor } from "@/services/test";
-import { AuthContext } from "@/context/auth.context";
+
+import { useCanister, IcpContext } from "@/libs/icp";
 
 export default function Page() {
   const [name, setName] = useState("");
+  const test = useCanister("test");
 
   async function fetchName() {
-    const testActor = await makeTestActor();
-    const name = await testActor.greet("test");
+    const name = (await test?.greet("test")) || "";
     setName(name);
   }
 
@@ -15,9 +15,9 @@ export default function Page() {
     fetchName();
   }, []);
 
-  const authContext = useContext(AuthContext);
+  const icpContext = useContext(IcpContext);
 
-  const { isAuthenticated, logIn, logOut } = authContext;
+  const { isAuthenticated, logIn, logOut } = icpContext;
 
   const handleOnLogIn = async (event: React.MouseEvent<HTMLElement>) => {
     logIn();

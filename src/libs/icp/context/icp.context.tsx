@@ -6,23 +6,19 @@ export type AuthType = {
   logOut: () => void;
 };
 
-export type AuthContextType = {
+export type IcpContextType = {
   isAuthenticated: boolean;
   logIn: () => any;
   logOut: () => any;
 };
 
-export type AuthContextProviderType = {
-  publicRoutes?: Array<string>;
+export type IcpContextProviderType = {
   children: ReactNode;
 };
 
-export const AuthContext = createContext({} as AuthContextType);
+export const IcpContext = createContext({} as IcpContextType);
 
-export const AuthContextProvider = ({
-  children,
-  publicRoutes = [],
-}: AuthContextProviderType) => {
+export const IcpContextProvider = ({ children }: IcpContextProviderType) => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -31,6 +27,7 @@ export const AuthContextProvider = ({
       const auth = await AuthClient.create();
       const isAuthenticated = await auth.isAuthenticated();
       setIsAuthenticated(isAuthenticated);
+
       setLoading(false);
     } catch (error) {
       throw error;
@@ -68,7 +65,7 @@ export const AuthContextProvider = ({
   }
 
   return (
-    <AuthContext.Provider
+    <IcpContext.Provider
       value={{
         isAuthenticated,
         logIn,
@@ -76,6 +73,6 @@ export const AuthContextProvider = ({
       }}
     >
       {!loading && children}
-    </AuthContext.Provider>
+    </IcpContext.Provider>
   );
 };

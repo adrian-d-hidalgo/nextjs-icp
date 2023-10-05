@@ -19,10 +19,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "dfx:deploy": "dfx deploy",
-    "dfx:generate": "dfx generate ; npm run dfx:generate:fix",
-    "dfx:generate:fix": "sh scripts/fix-dfx-generate.sh"
+    "lint": "next lint"
   },
   "devDependencies": {
     "eslint": "8.49.0",

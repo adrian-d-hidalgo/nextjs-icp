@@ -1,16 +1,11 @@
 import { AppProps } from "next/app";
-import { ThemeProvider, createTheme } from "@mui/material";
 
-import { AuthContextProvider } from "@/context/auth.context";
+import { IcpContextProvider } from "@/libs/icp";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const defaultTheme = createTheme();
-
   return (
-    <AuthContextProvider>
-      <ThemeProvider theme={defaultTheme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </AuthContextProvider>
+    <IcpContextProvider>
+      <Component {...pageProps} />
+    </IcpContextProvider>
   );
 }
