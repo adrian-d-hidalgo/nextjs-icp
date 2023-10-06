@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { AuthClient } from "@dfinity/auth-client";
 
-export type AuthType = {
+export type IcpType = {
   logIn: () => void | undefined;
   logOut: () => void;
 };
